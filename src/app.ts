@@ -1,5 +1,6 @@
 import express from 'express';
 
+const version = process.env.APP_VERSION ?? 'development';
 const app = express();
 
 app.get('/', (_request, response) => {
