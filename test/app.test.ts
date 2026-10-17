@@ -39,6 +39,14 @@ test('GET /api/health returns a healthy response', async () => {
     status: 'ok',
   });
 });
+
+app.get('/api/version', (_request, response) => {
+  response.json({
+    version: process.env.APP_VERSION ?? 'development',
+  });
+});
+
+export default app;
 test('GET /api/version returns the current version', async () => {
   const response = await fetch(`${baseUrl}/api/version`);
 
