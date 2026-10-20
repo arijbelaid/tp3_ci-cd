@@ -1,69 +1,117 @@
-# CI/CD Lab Starter
+<div align="center">
+  <h1>☁️ TP3 : CI/CD avec GitHub Actions et Render</h1>
+  <p><strong>Pipeline d'Intégration Continue (CI) et de Déploiement Continu (CD)</strong></p>
+  
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="GitHub Actions" />
+  <img src="https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white" alt="Render" />
+</div>
 
-A small Express and TypeScript app for the CI/CD Crash Course. Use this starting point to follow along with automated testing, GitHub Actions, and deployment to Render.
+<br>
 
-The starter includes a home page, a health endpoint, and a passing health endpoint test. You will add the combined `verify` script, GitHub Actions workflow, and version endpoint during the course.
+> **Objectif :** Mettre en place une usine logicielle (CI/CD) complète pour une application Node.js/Express/TypeScript. Chaque `git push` déclenche des tests automatisés, et le déploiement sur Render n'a lieu que si les tests passent. L'environnement inclut également des déploiements de prévisualisation (Previews).
 
-## Requirements
+<div align="center">
+  <br>
+  🔗 <strong>Application en production :</strong> <a href="https://tp3-ci-cd.onrender.com">https://tp3-ci-cd.onrender.com</a>
+  <br><br>
+  📄 <strong><a href="./TP3.pdf">Télécharger le rapport complet du TP3 (PDF)</a></strong>
+  <br><br>
+</div>
 
-- Node.js 24 and npm
-- Git
-- GitHub and Render accounts for the deployment sections
+---
 
-## Get started
+## 🚀 1. Préparation Locale et Premier Déploiement
 
-Clone the starter into a new folder:
+### Initialisation du projet
+Installation des dépendances et lancement de l'application en local.
+![Setup Local](captures/01-setup-local.png)
+![Setup Local](captures/01-setup-local1.png)
+![Setup Local](captures/01-setup-local3.png)
+![Setup Local](captures/01-setup-local4.png)
 
-```bash
-git clone https://github.com/bradtraversy/cicd-lab-starter.git cicd-lab
-cd cicd-lab
-npm ci
-```
+![App Locale](captures/02-app-locale.png)
 
-Start the development server:
+### Ajout de la commande de vérification
+Ajout du script `verify` dans le `package.json` pour lancer les tests, le typecheck et le build.
+![Package JSON](captures/03-package-json.png)
+![NPM Verify](captures/04-npm-verify.png)
 
-```bash
-npm run dev
-```
+### Premier Push et Déploiement Render
+Envoi du code sur GitHub et création du service Web sur Render.
+![Push Initial](captures/05-git-push-initial.png)
+![Création Render](captures/06-render-create.png)
 
-Open [localhost:3000](http://localhost:3000). The [health endpoint](http://localhost:3000/api/health) returns HTTP 200 with:
+Le premier déploiement est un succès, l'application est en ligne !
+![Render Deploy](captures/07-render-first-deploy.png)
+![App Render](captures/08-render-app.png)
 
-```json
-{"status":"ok"}
-```
+---
 
-Stop the server with Ctrl+C.
+## ⚙️ 2. Mise en place de l'Intégration Continue (CI)
 
-## Scripts
+### Configuration de GitHub Actions
+Création du workflow `.github/workflows/ci.yml` pour automatiser les tests.
+![GitHub Actions YML](captures/09-github-actions-yml.png)
 
-- `npm run dev`: start the development server with automatic restarts.
-- `npm run typecheck`: check TypeScript without generating output.
-- `npm test`: run the health endpoint test. The test starts and stops its own server.
-- `npm run build`: compile the app into `dist`.
-- `npm start`: run the compiled app after building it.
+### Validation via Pull Request
+Création d'une Pull Request pour vérifier que le pipeline fonctionne.
+![PR Créée](captures/10-pr-created.png)
+![PR Mergée](captures/11-pr-merged.png)
 
-## Start your own repository
+---
 
-From inside your newly cloned `cicd-lab` folder, remove the starter's Git history and remote connection, then initialize your own repository. This preserves the app files.
+## 🛡️ 3. Sécurisation et Automatisation du Déploiement
 
-These commands use Bash or Zsh. On Windows, use Git Bash.
+### Configuration de Render
+Le déploiement automatique est configuré pour ne se lancer **qu'après** le succès des tests CI (`After CI Checks Pass`).
+![Auto Deploy](captures/12-render-autodeploy.png)
 
-```bash
-rm -rf .git
-git init -b main
-git add .
-git commit -m "feat: add CI/CD lab starter"
-```
+### Protection de la branche `main` sur GitHub
+Mise en place d'un *Ruleset* exigeant que le check `Verify` passe avant de pouvoir merger.
+![GitHub Ruleset](captures/13-github-ruleset.png)
 
-Create an empty `cicd-lab` repository on GitHub without a README, license, or gitignore. Replace `YOUR_USERNAME` below with your GitHub username:
+### Mise à jour de l'application
+Modification du code source, push sur une branche et Pull Request.
+![Update App](captures/14-app-ts-update.png)
+![Push Update](captures/15-git-push-update.png)
 
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/cicd-lab.git
-git push -u origin main
-```
+---
 
-Continue with the course to add verification and deployment. Keep `package-lock.json` committed; dependencies, build output, and environment files are excluded by `.gitignore`.
+## 🚦 4. Démonstration d'un Échec de Test
 
-## Configuration
+Nous avons volontairement introduit une erreur (route `/api/version` manquante) pour prouver que le pipeline bloque le déploiement.
 
-The server uses port `3000` unless `PORT` is set. The home page displays `APP_VERSION`, defaulting to `development`. Neither variable is required to run the starter locally.
+### Échec de la Pull Request
+Le check `Verify` échoue (croix rouge) et le bouton "Merge" est bloqué par la règle de protection.
+![PR Echouée](captures/16-pr-failed.png)
+
+### Correction et Succès
+Ajout de la route manquante dans `src/app.ts`, ce qui relance les tests avec succès.
+![Fix App](captures/17-app-ts-fix.png)
+![PR Réussie](captures/18-pr-passed.png)
+
+### Vérification de l'API
+Test du nouvel endpoint en production.
+![API Version](captures/19-api-version.png)
+
+---
+
+## 🔍 5. Environnements de Prévisualisation (Previews)
+
+Activation des Previews sur Render pour tester les branches avant de les fusionner.
+
+![Render Previews](captures/20-render-previews.png)
+
+### Comparaison Preview vs Production
+L'URL de Preview affiche le nouveau texte ("Test Preview Final"), tandis que la Production garde l'ancien code tant que la PR n'est pas mergée.
+
+**URL de Preview :**
+![URL Preview](captures/21-preview-url.png)
+
+**URL de Production :**
+![URL Production](captures/22-production-url.png)
+
+---
+*Réalisé par [Arij Belaid](https://github.com/arijbelaid) dans le cadre du cours de DevOps.*
