@@ -91,6 +91,11 @@ Validation des contrôles
 Installation des dépendances du projet avec `npm ci` et préparation de l'environnement de développement local.
 
 ![Configuration de l'environnement local](captures/01-setup-local.png.jpg)
+![Configuration de l'environnement local](captures/01-setup-local2.png.jpg)
+
+![Configuration de l'environnement local](captures/01-setup-local3.png.jpg)
+![Configuration de l'environnement local](captures/01-setup-local4.png.jpg)
+
 
 ### 2.2. Exécution de l'application locale
 
