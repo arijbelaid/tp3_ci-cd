@@ -1,4 +1,4 @@
-<div align="center">
+
   <h1>☁️ TP3 : CI/CD avec GitHub Actions et Render</h1>
   <p><strong>Pipeline d'Intégration Continue (CI) et de Déploiement Continu (CD)</strong></p>
   
@@ -10,7 +10,7 @@
 
 <br>
 
-> **Objectif :** Mettre en place une usine logicielle (CI/CD) complète pour une application Node.js/Express/TypeScript. Chaque `git push` déclenche des tests automatisés, et le déploiement sur Render n'a lieu que si les tests passent.
+> **Objectif :** Mettre en place une usine logicielle (CI/CD) complète pour une application Node.js/Express/TypeScript.
 
 <div align="center">
   <br>
@@ -24,89 +24,52 @@
 
 ## 🚀 1. Préparation Locale et Premier Déploiement
 
-### Initialisation du projet
-Installation des dépendances et lancement de l'application en local.
-
-![Setup Local](captures/01-setup-local.png)
-![App Locale](captures/02-app-locale.png)
-
-### Ajout de la commande de vérification
-Ajout du script `verify` dans le `package.json`.
-
-![Package JSON](captures/03-package-json.png)
-![NPM Verify](captures/04-npm-verify.png)
-
-### Premier Push et Déploiement Render
-Envoi du code sur GitHub et création du service Web sur Render.
-
-![Push Initial](captures/05-git-push-initial.png)
-![Création Render](captures/06-render-create.png)
-
-Le premier déploiement est un succès, l'application est en ligne !
-
-![Render Deploy](captures/07-render-first-deploy.png)
-![App Render](captures/08-render-app.png)
+![Setup Local](captures/01-setup-local.png.jpg)
+![App Locale](captures/02-app-locale.png.jpg)
+![Package JSON](captures/03-package-json.png.jpg)
+![NPM Verify](captures/04-npm-verify.png.jpg)
+![Push Initial](captures/05-git-push-initial.png.jpg)
+![Création Render](captures/06-render-create.png.jpg)
+![Render Deploy](captures/07-render-first-deploy.png.jpg)
+![App Render](captures/08-render-app.png.jpg)
 
 ---
 
 ## ⚙️ 2. Mise en place de l'Intégration Continue (CI)
 
-### Configuration de GitHub Actions
-
-![GitHub Actions YML](captures/09-github-actions-yml.png)
-
-### Validation via Pull Request
-
-![PR Créée](captures/10-pr-created.png)
-![PR Mergée](captures/11-pr-merged.png)
+![GitHub Actions YML](captures/09-github-actions-yml.png.jpg)
+![PR Créée](captures/10-pr-created.png.jpg)
+![PR Mergée](captures/11-pr-merged.png.jpg)
 
 ---
 
 ## 🛡️ 3. Sécurisation et Automatisation du Déploiement
 
-### Configuration de Render
-
-![Auto Deploy](captures/12-render-autodeploy.png)
-
-### Protection de la branche `main` sur GitHub
-
-![GitHub Ruleset](captures/13-github-ruleset.png)
-
-### Mise à jour de l'application
-
+![Auto Deploy](captures/12-render-autodeploy.png.jpg)
+![GitHub Ruleset](captures/13-github-ruleset.png.jpg)
 ![Update App](captures/14-app-ts-update.png)
-![Push Update](captures/15-git-push-update.png)
+![Push Update](captures/15-git-push-update.png.jpg)
 
 ---
 
 ## 🚦 4. Démonstration d'un Échec de Test
 
-### Échec de la Pull Request
-
-![PR Echouée](captures/16-pr-failed.png)
-
-### Correction et Succès
-
-![Fix App](captures/17-app-ts-fix.png)
+![PR Echouée](captures/16-pr-failed.png.jpg)
+![Fix App](captures/17-app-ts-fix.png.jpg)
 ![PR Réussie](captures/18-pr-passed.png)
-
-### Vérification de l'API
-
-![API Version](captures/19-api-version.png)
+![API Version](captures/19-api-version.png.jpg)
 
 ---
 
 ## 🔍 5. Environnements de Prévisualisation (Previews)
 
-![Render Previews](captures/20-render-previews.png)
-
-### Comparaison Preview vs Production
+![Render Previews](captures/20-render-previews.png.jpg)
 
 **URL de Preview :**
-![URL Preview](captures/21-preview-url.png)
+![URL Preview](captures/21-preview-url.png.jpg)
 
 **URL de Production :**
-![URL Production](captures/22-production-url.png)
+![URL Production](captures/22-production-url.png.jpg)
 
 ---
 *Réalisé par [Arij Belaid](https://github.com/arijbelaid) dans le cadre du cours de DevOps.*
